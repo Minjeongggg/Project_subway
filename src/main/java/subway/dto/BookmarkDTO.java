@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class BookmarkDTO {
 	
-	int bookmark_cd;
+	String bookmark_cd;
 	String member_id;
 	int station_cd;
 	Date bookmark_date;
@@ -12,11 +12,11 @@ public class BookmarkDTO {
 	// 추가 (db엔 없음)
 	String station_nm;
 
-	public int getBookmark_cd() {
+	public String getBookmark_cd() {
 		return bookmark_cd;
 	}
 
-	public void setBookmark_cd(int bookmark_cd) {
+	public void setBookmark_cd(String bookmark_cd) {
 		this.bookmark_cd = bookmark_cd;
 	}
 

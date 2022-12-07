@@ -81,7 +81,7 @@ public class BookmarkDAO {
 			while(rs.next()) {
 				BookmarkDTO dto = new BookmarkDTO();
 				
-				dto.setBookmark_cd(rs.getInt("bookmark_cd"));
+				dto.setBookmark_cd(rs.getString("bookmark_cd"));
 				dto.setMember_id(rs.getString("member_id"));
 				dto.setStation_cd(rs.getInt("station_cd"));
 				dto.setBookmark_date(rs.getDate("bookmark_date"));
@@ -136,8 +136,8 @@ public class BookmarkDAO {
 			
 
 			while(rs.next()) {
-				 Integer rs_stationCD;
-				 rs_stationCD =rs.getInt("station_cd");
+				 String rs_stationCD;
+				 rs_stationCD =rs.getString("station_cd");
 				 System.out.println("db 받은 값 :"+rs_stationCD);
 				 
 				 if( rs_stationCD  != null) {
@@ -155,7 +155,6 @@ public class BookmarkDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("이거 프린트 되나2");
 		return false;
 	}
 
@@ -172,7 +171,7 @@ public class BookmarkDAO {
 			query +="(BOOKMARK_CD, MEMBER_ID, STATION_CD, BOOKMARK_DATE) ";
 			query +="VALUES ";
 			query +="( ";
-			query +="BOOKMARK_SEQ.NEXTVAL, ";
+			query +="?, ";
 			query +="?, ";
 			query +="?, ";
 			query +="SYSDATE ";
@@ -181,8 +180,9 @@ public class BookmarkDAO {
 			System.out.println("인서트 쿼리 : "+query);
 			
 			pstmt= con.prepareStatement(query);
-			pstmt.setString(1, member_id);
-			pstmt.setInt(2, station_cd);
+			pstmt.setString(1, ""+member_id+station_cd);
+			pstmt.setString(2, member_id);
+			pstmt.setInt(3, station_cd);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
