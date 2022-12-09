@@ -23,10 +23,8 @@ public class BookmarkDAO {
 	
 	public BookmarkDAO()  {
 		try {
-			
-			Context ctx = new InitialContext();
-			Context envContext = (Context) ctx.lookup("java:comp/env");
-			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+			InitialContext ctx = new InitialContext();
+			dataFactory = (DataSource) ctx.lookup("java:comp/env/jdbc/mysqlDB"); 
 			
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
@@ -184,11 +182,11 @@ public class BookmarkDAO {
 			pstmt.setString(2, member_id);
 			pstmt.setInt(3, station_cd);
 			
-			ResultSet rs = pstmt.executeQuery();
-			
-			if (rs != null) {
-				rs.close();
-			}
+			//ResultSet rs = pstmt.executeQuery();
+			pstmt.execute();
+			//if (rs != null) {
+		//		rs.close();
+			//}
 			if (pstmt != null) {
 				pstmt.close();
 			}
@@ -224,12 +222,12 @@ public class BookmarkDAO {
 			pstmt.setString(1, member_id);
 			pstmt.setInt(2, station_cd);
 			
-			ResultSet rs = pstmt.executeQuery();
-	
+			//ResultSet rs = pstmt.executeQuery();
+			pstmt.execute();
 			
-			if (rs != null) {
-				rs.close();
-			}
+			/*
+			 * if (rs != null) { rs.close(); }
+			 */
 			if (pstmt != null) {
 				pstmt.close();
 			}

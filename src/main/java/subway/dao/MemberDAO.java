@@ -1,6 +1,7 @@
 package subway.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,10 +21,10 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		try {
-			Context ctx = new InitialContext();
 
-			Context envContext = (Context) ctx.lookup("java:comp/env");
-			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+			InitialContext ctx = new InitialContext();
+			dataFactory = (DataSource) ctx.lookup("java:comp/env/jdbc/mysqlDB"); 
+			
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
@@ -36,27 +37,35 @@ public class MemberDAO {
 
 		try {
 			con = dataFactory.getConnection();
-			System.out.println("커넥션풀 성공 => member테이블");
+			
+			if (con != null) {
+				System.out.println("커넥션풀 성공 => member테이블");
+			}else {
+				System.out.println("fail");
+			}
+			
 			String query = "";
 
 			query += "INSERT INTO MEMBER_TBL ";
 			query += "(member_id, member_pw, member_name, member_email, member_nickname) ";
-			query += "VALUES(?, ?, ?, ?, ?) ";
-			query += "";
+			query += "VALUES(?, ?, ?, ?, ?); ";
+			//query += "";
 
 			pstmt = con.prepareStatement(query);
-			System.out.println("쿼리는 : " + query);
+			System.out.println("=====> 쿼리는 : " + query);
 			pstmt.setString(1, memberDTO.getMember_id());
 			pstmt.setString(2, memberDTO.getMember_pw());
 			pstmt.setString(3, memberDTO.getMember_name());
 			pstmt.setString(4, memberDTO.getMember_email());
 			pstmt.setString(5, memberDTO.getMember_nickname());
-
-			ResultSet rs = pstmt.executeQuery();
-
-			if (rs != null) {
-				rs.close();
-			}
+			System.out.println("=====> 쿼리는 : " + pstmt.toString());
+			//ResultSet rs; 
+			//Boolean t = (Boolean)pstmt.execute();
+			pstmt.execute();
+			
+//			if (rs != null) {
+//				rs.close();
+//			}
 			if (pstmt != null) {
 				pstmt.close();
 			}
@@ -175,13 +184,14 @@ public class MemberDAO {
 			pstmt.setString(1, memo);
 			pstmt.setString(2, id);
 			
-			ResultSet rs = pstmt.executeQuery();
+			pstmt.execute();
+			//ResultSet rs = pstmt.executeQuery();
 			
-			if (rs != null) {
-				rs.close();
-			}
-			if (pstmt != null) {
-				pstmt.close();
+//			if (rs != null) {
+//				rs.close();
+//			}
+		if (pstmt != null) {
+			pstmt.close();
 			}
 			if (con != null) {
 				con.close();
