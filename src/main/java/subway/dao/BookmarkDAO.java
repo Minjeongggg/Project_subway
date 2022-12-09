@@ -174,7 +174,7 @@ public class BookmarkDAO {
 			query +="?, ";
 			query +="?, ";
 			query +="?, ";
-			query +="SYSDATE ";
+			query +="NOW() ";
 			query +=") ";
 			
 			System.out.println("인서트 쿼리 : "+query);
