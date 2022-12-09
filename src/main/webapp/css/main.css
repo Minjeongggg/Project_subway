@@ -58,7 +58,8 @@ header #header_img{
 }
 
 #pop{
-    width: 500px;
+    width: 100%;
+    margin: 0 auto;
     background-color: white;
     /* position: absolute;
     top: 225px;
@@ -72,6 +73,7 @@ header #header_img{
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
+    
 }
 
 #subway_div label{

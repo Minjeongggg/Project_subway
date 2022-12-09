@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-import='subway.dao.*' import='subway.dto.*'
-	import="java.util.ArrayList" import="java.util.List"
-	%>
+	pageEncoding="UTF-8" import='subway.dao.*' import='subway.dto.*'
+	import="java.util.ArrayList" import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -22,19 +20,20 @@ import='subway.dao.*' import='subway.dto.*'
 String member_id = (String) session.getAttribute("member_id");
 System.out.println(member_id);
 
-List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
+List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList");
 %>
 <body>
 	<header>
 		<div>
-			<a href="main_process.jsp"><img id="header_img" src="./img/logo1.png"></a>
+			<a href="main_process.jsp"><img id="header_img"
+				src="./img/logo1.png"></a>
 		</div>
 	</header>
 	<div id="wrap_main">
-		<TABLE border="1" width="100%" height="100%" >
+		<TABLE border="1" width="100%" height="100%">
 			<TR>
-				<TD>
-					<TABLE border="1" style="width:100%;">
+				<TD style="width:75%;">
+					<TABLE border="1" style="width: 100%;">
 						<TR>
 							<TD>
 								<p
@@ -107,11 +106,11 @@ List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
 						</TR>
 					</TABLE>
 				</TD>
-				<TD valign="top">
-					<TABLE border="1" width="500" style="width:100%;">
+				<TD valign="top" style="width:25%;">
+					<TABLE border="1" style="width: 100%;">
 						<TR>
 							<TD bgcolor="#AFEEEE">
-								<DIV align="center" style="display: block; padding: 10px; ">
+								<DIV align="center" style="display: block; padding: 10px;">
 									<%
 									if ((String) session.getAttribute("member_id") == null) {
 									%>
@@ -122,7 +121,8 @@ List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
 									<FONT size="6em">환영합니다 <%=session.getAttribute("member_nickname")%>
 										님!
 									</FONT> <br>
-									<form action="login_process.jsp" id="form_logout" accept-charset="UTF-8">
+									<form action="login_process.jsp" id="form_logout"
+										accept-charset="UTF-8">
 										<input type="hidden" name="input_logout" value="true">
 										<input type="button" id="btn_logout" value="로그아웃">
 									</form>
@@ -139,30 +139,33 @@ List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
 							<TD bgcolor="#4682B4" style="padding: 5px;"><FONT size="5em">즐겨찾기</FONT>
 								<input type="button" id="btn_addBookmark" value="+"></TD>
 						</TR>
-			
+
 
 						<tr>
 							<td>
 								<div id="pop">
-									<form action="tour_info_1.html" id="form_bookmark" accept-charset="UTF-8">
+									<form action="tour_info_1.html" id="form_bookmark"
+										accept-charset="UTF-8">
 										<div id="subway_div">
-										
+
 											<c:forEach var="item" items="${bookmarkList}" varStatus="i">
-												 <input type="checkbox" style="display:none;" name="subway_nm" id="subway_${i.index}" class="subway_nm" value="${item.station_cd}">
-												 <c:if test="${! empty item.member_id}">
-												 		<label for="subway_${i.index}" >
-												 		<div class="${item.station_nm}">⭐${item.station_nm}역</div>
-														 </label>
-												 </c:if>
-												 <c:if test="${empty item.member_id}">
-												 		<label for="subway_${i.index}" >
-												 		<div class="${item.station_nm}">${item.station_nm}역</div>
-												 		</label>
-												 </c:if>
+												<input type="checkbox" style="display: none;"
+													name="subway_nm" id="subway_${i.index}" class="subway_nm"
+													value="${item.station_cd}">
+												<c:if test="${! empty item.member_id}">
+													<label for="subway_${i.index}">
+														<div class="${item.station_nm}">⭐${item.station_nm}역</div>
+													</label>
+												</c:if>
+												<c:if test="${empty item.member_id}">
+													<label for="subway_${i.index}">
+														<div class="${item.station_nm}">${item.station_nm}역</div>
+													</label>
+												</c:if>
 											</c:forEach>
-											
-											
-										</div>						
+
+
+										</div>
 									</form>
 								</div>
 							</td>
@@ -173,14 +176,14 @@ List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
 									<TR>
 										<TD bgcolor="LightSteelBlue">
 											<div id="bookmarked_div">
-												
-											<c:forEach var="item" items="${bookmarkList}" varStatus="i">
-												 <c:if test="${! empty item.member_id}">
-												 	<div class="${item.station_nm}">⭐${item.station_nm}역</div>
-												 </c:if>  
-											</c:forEach>
-											
-											
+
+												<c:forEach var="item" items="${bookmarkList}" varStatus="i">
+													<c:if test="${! empty item.member_id}">
+														<div class="${item.station_nm}">⭐${item.station_nm}역</div>
+													</c:if>
+												</c:forEach>
+
+
 											</div>
 										</TD>
 									</TR>
@@ -195,7 +198,7 @@ List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
 							<TD bgcolor="LightSteelBlue">
 								<form id="form_memo" accept-charset="UTF-8">
 									<textarea id="memo_contents" name="memo_contents" type="text"
-										style="width: 100%; height: 250px; " value="" wrap="hard">${memo_contents}</textarea>
+										style="width: 100%; height: 250px;" value="" wrap="hard">${memo_contents}</textarea>
 									<input id="memo_submit" type="button" value="저장"
 										style="width: 100%; height: 40px;">
 								</form>
@@ -213,164 +216,163 @@ List<BookmarkDTO> bookmarkList= (ArrayList)session.getAttribute("bookmarkList");
 </body>
 
 <script>
+	window.onload = function() {
 
-window.onload = function () {
+		
+		// 1. 북마크 등록 스크립트
+		function bookmark_do(e) {
+			let list_check = $("#subway_div label");
 
+			for (let i = 0; i < list_check.length; i++) {
+				list_check[i]
+						.addEventListener(
+								"click",
+								function(e) {
+									let target = event.target;
+									//alert(target);
 
-    let list_check = $("#subway_div label");
+									var bookmark_nm = $(target).text();
+									bookmark_nm = bookmark_nm.replaceAll('⭐',
+											'');
+									bookmark_nm = bookmark_nm.replaceAll(' ',
+											'');
+									bookmark_nm = bookmark_nm.replace('역', '');
 
-    for (let i = 0; i < list_check.length; i++) {
-        list_check[i].addEventListener("click", function (e) {
-            let target = event.target;
-            //alert(target);
+									//alert("별 빼기 시도: "+bookmark_nm);
 
-            var bookmark_nm = $(target).text();
-            bookmark_nm = bookmark_nm.replaceAll('⭐','');
-            bookmark_nm = bookmark_nm.replaceAll(' ','');
-            bookmark_nm = bookmark_nm.replace('역','');
+									let label_for = target.parentNode
+											.getAttribute("for");
+									//alert(label_for);
+									let bookmark_value = $(
+											"input[id=" + label_for + "]")
+											.val();
+									//alert(bookmark_value);
 
-            //alert("별 빼기 시도: "+bookmark_nm);
+									$.ajax({
+												url : "${contextPath}/bookmark_process.jsp",
+												type : "post",
+												dataType : "json",
+												data : {
+													station_cd : bookmark_value
+												}
+											});
 
+									//star_update
+									function star_update() {
+										let text = $(target).text();
+										console.log("원래 텍스트 : " + text);
+										if (text.includes('⭐')) {
+											text = text.replaceAll('⭐', '')
+											text = text.replaceAll(' ', '');
+											console.log("지운 후 텍스트 : " + text);
+											$(target).text(text);
+										} else {
+											$(target).text("⭐" + text);
+										}
+									}
+									star_update();
 
+									// bookmark_update
+									function bookmark_update() {
+										let list_bookmarked = new Array();
+										list_bookmarked = $("#bookmarked_div")
+												.children();
+										let alredy_in;
+										let same_class;
 
-            let label_for = target.parentNode.getAttribute("for");
-            //alert(label_for);
-            let bookmark_value = $("input[id="+label_for+"]").val();
-            //alert(bookmark_value);
+										for (let i = 0; i < list_bookmarked.length; i++) {
+											console.log("중요");
+											console.log(bookmark_nm);
+											console
+													.log(list_bookmarked[i].className);
 
-            $.ajax({
-                url: "${contextPath}/bookmark_process.jsp",
-                type: "post",
-                dataType: "json",
-                data: {
-                    station_cd: bookmark_value
-                }
-            });
+											if (bookmark_nm == list_bookmarked[i].className) {
+												same_class = list_bookmarked[i].className;
+												alredy_in = true;
+											}
 
-            
-            
-            function star_update(){
-                let text = $(target).text();
-                console.log("원래 텍스트 : "+text);
-                if(text.includes('⭐')){
-                    text = text.replaceAll('⭐','')
-                    text = text.replaceAll(' ','');
-                    console.log("지운 후 텍스트 : "+text);
-                    $(target).text(text);
-                }else{
-                    $(target).text("⭐"+text);
-                }
-            }
-            star_update();
-            
-            
-            
-            
+										}
 
-            function bookmark_update(){
-                let list_bookmarked = new Array();
-                list_bookmarked = $("#bookmarked_div").children();
-                let alredy_in;
-                let same_class;
+										console.log("같은 이름 :" + same_class);
 
-                for (let i = 0; i < list_bookmarked.length; i++) {
-                    console.log("중요");
-                    console.log(bookmark_nm);
-                    console.log(list_bookmarked[i].className);
+										if (alredy_in) {
+											let list_children = $(
+													"#bookmarked_div")
+													.children();
 
+											for (let i = 0; i < list_children.length; i++) {
+												if (list_children[i].className == same_class) {
+													list_children[i].remove();
+												}
+											}
+										} else {
+											$("#bookmarked_div").append(
+													"<div class="+bookmark_nm+">"
+															+ "⭐" + bookmark_nm
+															+ "역 </div>");
+										}
 
-                    if (bookmark_nm == list_bookmarked[i].className) {
-                        same_class = list_bookmarked[i].className;
-                        alredy_in = true;
-                    }
+									}
 
-                }
+									bookmark_update();
 
-                console.log("같은 이름 :" + same_class);
+								})
+			}
+		}
 
-                if (alredy_in) {
-                    let list_children = $("#bookmarked_div").children();
+		bookmark_do();
+		
+		
+		// 2. 북마크 +/- show 스크립트
+		$('#btn_addBookmark').off('click').on('click', function() {
+			//alert("test");
 
-                    for (let i = 0; i < list_children.length; i++) {
-                        if (list_children[i].className == same_class) {
-                            list_children[i].remove();
-                        }
-                    }
-                } else {
-                    $("#bookmarked_div").append("<div class="+bookmark_nm+">"+"⭐"+bookmark_nm+"역 </div>");
-                }
+			if ($('#pop').css('display') == 'none') {
+				$('#btn_addBookmark').attr("value", "-")
+				console.log($('#btn_addBookmark').val());
+				$('#pop').show();
+			} else {
+				$('#btn_addBookmark').attr("value", "+")
+				$('#pop').hide();
+			}
 
-            }
+		});
+		
 
-            bookmark_update();
+        // 3. 메모 submit ajax
+		$('#memo_submit').off("click").on("click", function() {
 
-        })
-    }
+			// alert("memo_submit");
+			let memo_contents = $("#memo_contents").val();
+			console.log("memo: " + memo_contents);
+			$.ajax({
+				url : "${contextPath}/memo_process.jsp",
+				type : "POST",
+				dataType : "json",
+				data : {
+					memo_contents : memo_contents,
+					process_name : "insert_memo"
+				}
+			});
+		})
+		
+		// 4. 로그아웃 ajax
+		let btn_logout = document.querySelector("#btn_logout");
 
+		btn_logout.addEventListener("click", function() {
+			let logout = confirm("로그아웃 하시겠습니까?");
+			if (logout) {
+				let form = document.querySelector("#form_logout");
+				form.action = "login_process.jsp";
+				form.method = "post";
+				form.submit();
+			} else {
+				return;
+			}
+		})
 
-
-
-
-
-
-
-
-
-    //==========
-    $('#btn_addBookmark').off('click').on('click', function () {
-        //alert("test");
-
-        if ($('#pop').css('display') == 'none') {
-            $('#btn_addBookmark').attr("value", "-")
-            console.log($('#btn_addBookmark').val());
-            $('#pop').show();
-        } else {
-            $('#btn_addBookmark').attr("value", "+")
-            $('#pop').hide();
-        }
-
-    });
-    //===============
-
-    //=============
-
-    $('#memo_submit').off("click").on("click", function () {
-
-       // alert("memo_submit");
-
-        let memo_contents = $("#memo_contents").val();
-        console.log("memo: " + memo_contents);
-        $.ajax({
-            url: "${contextPath}/memo_process.jsp",
-            type: "POST",
-            dataType: "json",
-            data: {
-                memo_contents: memo_contents,
-                process_name: "insert_memo"
-            }
-        });
-    })
-//=========================
-
-                                        let btn_logout = document.querySelector("#btn_logout");
-
-                                        btn_logout.addEventListener("click", function () {
-                                            let logout = confirm("로그아웃 하시겠습니까?");
-                                            if (logout) {
-                                                let form = document.querySelector("#form_logout");
-                                                form.action = "login_process.jsp";
-                                                form.method = "post";
-                                                form.submit();
-                                            } else {
-                                                return;
-                                            }
-                                        })
-
-
-//=========window.onload끝
-}
-
-
+		//=========window.onload끝
+	}
 </script>
 
 
