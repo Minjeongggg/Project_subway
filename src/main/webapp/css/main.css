@@ -46,8 +46,7 @@ header #header_img{
 	
 	height: 200px;
 	display:block;
-	background-color: yellow;
-		
+	background-color: rgb(255, 221, 255);
 }
 #siganButton:focus{
 	 background: gray;
@@ -176,5 +175,4 @@ textarea#memo_contents{
 	display:flex;
 
     background-image: url(../img/subway2.png);
-    background-repeat: no-repeat;
-}
+    background-repeat: no-repeat;}
