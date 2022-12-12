@@ -21,25 +21,30 @@
 	let siganButton = document.querySelector("#siganButton");
 	let YeonButton = document.querySelector("#YeonButton");
 	
-	var broscr = window.matchMedia("screen and (max-width: 1850px)");
+	var broscr1 = window.matchMedia("screen and (max-width: 1500px)");
+        var broscr2 = window.matchMedia("screen and (min-width: 1850px)");
 
-        broscr.addListener(function(e) {
+        broscr1.addListener(function(e) {
             if(e.matches) {
+                document.getElementById("screen_side").style.display = "none";
+                document.getElementById("btn_ham").style.display = "block";
+            } else {
+                document.getElementById("screen_side").style.display = "inline";
+                document.getElementById("btn_ham").style.display = "none";
+            }
+        });
+
+        broscr2.addListener(function(e) {
+            if(e.matches) {
+                document.getElementById("screen_main").style.width = "75%";
+                document.getElementById("screen_side").style.width = "25%";
+                document.getElementById("screen_side").style.position = "static";
+            } else {
                 document.getElementById("screen_main").style.width = "100%";
                 document.getElementById("screen_side").style.width = "350px";
                 document.getElementById("screen_side").style.position = "fixed";
                 document.getElementById("screen_side").style.top = "75px";
                 document.getElementById("screen_side").style.right = "0";
-                document.getElementById("screen_side").style.display = "none";
-                document.getElementById("btn_ham").style.display = "block";
-            } else {
-                document.getElementById("screen_main").style.width = "75%";
-                document.getElementById("screen_side").style.width = "25%";
-                document.getElementById("screen_side").style.position = "static";
-                document.getElementById("screen_side").style.top = "0";
-                document.getElementById("screen_side").style.right = "0";
-                document.getElementById("screen_side").style.display = "inline";
-                document.getElementById("btn_ham").style.display = "none";
             }
         });
 
