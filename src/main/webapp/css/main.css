@@ -219,3 +219,17 @@ span#btn_ham {
         display: block;
     }
 }
+
+@media (min-width: 1500px) and (max-width: 1850px) {
+    TD#screen_main {
+        width: 100%;
+    }
+    
+    TD#screen_side {
+        width: 350px;
+        position: fixed;
+        top: 75px;
+        right: 0;
+        display: inline;
+    }
+}
