@@ -58,7 +58,7 @@
 	}
 	
 	function delayTrainFunction() {
-
+		var delay = "blue";
 		$.ajax({
 			url : "${contextPath}/SubwayTime.jsp?station="+stationNM+"&type=delay",
 			type : "POST",
@@ -76,6 +76,7 @@
 				    var str_up_state ="";
 				    var str_down =""; 
 				    var str_down_state ="";
+				    var str_img="";
 					$.each(dt, function(index, item) { // 데이터 =item   
 						if (index=="UP") 
 				    		str_up = item;
@@ -84,11 +85,32 @@
 				    	else if (index=="DOWN") 
 				    		str_down += item;
 				    	else if (index=="DOWN_STATE") 
-				    		str_down_state += "(Delay:" + item +")";	
+				    		str_down_state += "(Delay:" + item +")";
+						if(item == "00:00")
+							delay = "blue";
+						var slice_time = parseInt(item.slice(4,6));
+						if(slice_time > 0){
+							delay = "red";  //연착되었을 때 빨간 icon
+						}
+						
 						
 					});   
 					str_time += "<td>" + str_up + str_up_state + "</td>";
 					str_time += "<td>" + str_down + str_down_state + "</td>";
+					str_time += "<tr height=15px><td> </td></tr>";
+					if(delay == "blue"){
+						str_img += "<td><img src='./img/blue_subway.png' width=100px height=150px></td>";
+						str_img += "<td><img src='./img/blue_subway.png' width=100px height=150px></td>";
+						//$("#delay_img").append("<img src='./img/blue_subway.png' width=100px height=100px>");
+						//$("#delay_img").attr("style", "width:50px; height:50px;")
+					}
+					else if (delay ==  "red"){
+						str_img += "<td><img src='./img/red_subway.png' width=100px height=150px></td>";
+						str_img += "<td><img src='./img/red_subway.png' width=100px height=150px></td>";
+						//$("#information-panel").append("<div><img src='./img/red_subway.png'></div>");
+					}
+					str_time += "<tr>" + str_img + "</tr>";
+					
 					str_time += "</tr></table>";
 					$("#information-panel").empty();  
 					$("#information-panel").append(str_time);  
