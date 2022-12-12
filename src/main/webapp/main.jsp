@@ -21,6 +21,41 @@
 	let siganButton = document.querySelector("#siganButton");
 	let YeonButton = document.querySelector("#YeonButton");
 	
+	var broscr = window.matchMedia("screen and (max-width: 1850px)");
+
+        broscr.addListener(function(e) {
+            if(e.matches) {
+                document.getElementById("screen_main").style.width = "100%";
+                document.getElementById("screen_side").style.width = "350px";
+                document.getElementById("screen_side").style.position = "fixed";
+                document.getElementById("screen_side").style.top = "75px";
+                document.getElementById("screen_side").style.right = "0";
+                document.getElementById("screen_side").style.display = "none";
+                document.getElementById("btn_ham").style.display = "block";
+            } else {
+                document.getElementById("screen_main").style.width = "75%";
+                document.getElementById("screen_side").style.width = "25%";
+                document.getElementById("screen_side").style.position = "static";
+                document.getElementById("screen_side").style.top = "0";
+                document.getElementById("screen_side").style.right = "0";
+                document.getElementById("screen_side").style.display = "inline";
+                document.getElementById("btn_ham").style.display = "none";
+            }
+        });
+
+        function OpenSidemenu() {
+            if (document.getElementById("screen_side").style.display == "inline") {
+                document.getElementById("screen_side").style.display = "none";
+            } else {
+                document.getElementById("screen_main").style.width = "100%";
+                document.getElementById("screen_side").style.width = "350px";
+                document.getElementById("screen_side").style.position = "fixed";
+                document.getElementById("screen_side").style.top = "75px";
+                document.getElementById("screen_side").style.right = "0";
+                document.getElementById("screen_side").style.display = "inline";
+            }
+        }
+	
 	function myTimeFunction() {
 
 		$.ajax({
@@ -147,7 +182,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 	<div id="wrap_main">
 		<TABLE border="0" width="100%" height="100%" >
 			<TR>
-				<TD style="width:75%;">
+				<TD id="screen_main">
 				
 					<TABLE border="0" style="width: 100%;">
 						<TR>
@@ -231,7 +266,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 						</TR>
 					</TABLE>
 				</TD>
-				<TD valign="top" style="width:25%;">
+				<TD id="screen_side" valign="top">
 					<TABLE border="0" style="width: 100%; border-spacing: 0;">
 						<TR>
 							<TD bgcolor="#AFEEEE">
@@ -347,6 +382,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 		</TABLE>
 
 	</div>
+	<span id="btn_ham" onclick="OpenSidemenu()">≡</span>
 </body>
 
 <script>
