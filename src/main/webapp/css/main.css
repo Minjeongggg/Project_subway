@@ -30,6 +30,65 @@ header #header_img{
 
 #wrap_main{
     margin-top: 75px;
+   
+}
+
+
+#select-panel{
+    width: 130px;
+    position: absolute;
+    background-color: whitesmoke;
+    border: 3px solid black;
+     display: block;
+}
+
+#information-panel{
+	
+	height: 150px;
+	display:block;
+	background-color: yellow;
+		
+}
+#siganButton:focus{
+	 background: gray;
+  	color: whitesmoke;
+}
+
+.path12{
+
+    width : 200px;
+
+    cursor : pointer;
+
+  }
+
+.my-div {
+
+    width : 200px;
+
+    height : 200px;
+
+    background-color : blue;
+
+    cursor : pointer;
+
+  }
+
+  .asd {
+    background-color: #6aafe6;
+    color: black;
+    font-size: 16px;
+    
+}
+.asd2 {
+    background-color: #6aafe6;
+    color: black;
+    font-size: 16px;
+    
+}
+.asd2:focus{
+		 background: gray;
+  	color: whitesmoke;
 }
 
 /*  */
@@ -61,13 +120,11 @@ header #header_img{
     width: 100%;
     margin: 0 auto;
     background-color: white;
-    /* position: absolute;
-    top: 225px;
-     */
+
      display: none;
 }
 
-/**/
+
 #subway_div{
     display: flex;
     flex-wrap: wrap;
@@ -109,4 +166,15 @@ input[name="subway_nm"]{
 
 textarea#memo_contents{
     font-size: 1.4em;
+}
+
+#tx {
+    font-size: 17px;
+}
+
+.bc {
+	display:flex;
+
+    background-image: url(../img/subway2.png);
+    background-repeat: no-repeat;
 }

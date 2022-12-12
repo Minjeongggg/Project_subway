@@ -13,8 +13,101 @@
 <head>
 <meta charset="UTF-8">
 <title>환승역</title>
-<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/main.css?after" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script language="JavaScript">
+	var stationNM;
+	let siganButton = document.querySelector("#siganButton");
+	let YeonButton = document.querySelector("#YeonButton");
+	
+	function myTimeFunction() {
+
+		$.ajax({
+			url : "${contextPath}/SubwayTime.jsp?station="+stationNM+"&type=time",
+			type : "POST",
+			dataType : "json",
+			data : {
+				station : stationNM,
+				type : "time"
+			} ,
+			success : function(dt,status) {
+				if (status == 'success') { 
+				     $("#information-panel").empty();
+				     var str_time="<table style='text-align:center'><th width=150>상행</th><th width=150>하행</th><tr>";
+				     var indexType="";
+				     var str_up_time ="";
+				     var str_down_time =""; 
+					 $.each(dt, function(index, item) { // 데이터 =item 
+						 indexType = index; 
+					     $.each(item, function(idx, iii) { 
+					    	if (indexType == "UP_TIME") 
+					    		str_up_time += "<li>" + iii +"</li>";
+					    	else str_down_time += "<li>" + iii +"</li>"; 
+					     }); 
+				
+			         });  
+					 str_time += "<td>" + str_up_time + "</td>";
+					 str_time += "<td>" + str_down_time + "</td>";
+					 str_time += "</tr></table>";
+					 $("#information-panel").empty();  
+					 $("#information-panel").append(str_time); 
+				}
+			}
+		});
+	}
+	
+	function delayTrainFunction() {
+
+		$.ajax({
+			url : "${contextPath}/SubwayTime.jsp?station="+stationNM+"&type=delay",
+			type : "POST",
+			dataType : "json",
+			data : {
+				station : stationNM,
+				type : "delay"
+			} ,
+			success : function(dt,status) {
+				if (status == 'success') { 
+					
+					var str_time="<table style='text-align:center'><th width=200>상행</th><th width=200>하행</th><tr>";
+					var indexType="";
+				    var str_up=0;
+				    var str_up_state ="";
+				    var str_down =""; 
+				    var str_down_state ="";
+					$.each(dt, function(index, item) { // 데이터 =item   
+						if (index=="UP") 
+				    		str_up = item;
+				    	else if (index=="UP_STATE") 
+					     	str_up_state = "(Delay:"+item +")";
+				    	else if (index=="DOWN") 
+				    		str_down += item;
+				    	else if (index=="DOWN_STATE") 
+				    		str_down_state += "(Delay:" + item +")";	
+						
+					});   
+					str_time += "<td>" + str_up + str_up_state + "</td>";
+					str_time += "<td>" + str_down + str_down_state + "</td>";
+					str_time += "</tr></table>";
+					$("#information-panel").empty();  
+					$("#information-panel").append(str_time);  
+				}
+			}
+		});
+	}
+	
+	function select_station(stat, stName) {
+	    console.log(stat, stName);
+	    stationNM = stName;
+	    
+		var a = document.getElementById("select-panel").style.width;
+	    document.getElementById("select-panel").style.left = String( Number(stat.getAttribute("cx")) - Number(a.slice(0, -2))/2) + "px";
+	    document.getElementById("select-panel").style.top = stat.getAttribute("cy") + "px";
+	    document.getElementById("stsName").innerHTML = "역이름 : " + stName;
+
+	}
+</script>
 </head>
 <%
 String member_id = (String) session.getAttribute("member_id");
@@ -30,84 +123,94 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 		</div>
 	</header>
 	<div id="wrap_main">
-		<TABLE border="1" width="100%" height="100%">
+		<TABLE border="0" width="100%" height="100%" >
 			<TR>
 				<TD style="width:75%;">
-					<TABLE border="1" style="width: 100%;">
+				
+					<TABLE border="0" style="width: 100%;">
 						<TR>
-							<TD>
-								<p
-									style="background-image: url('subway_map.png'); background-repeat: no-repeat;">
-									<SVG height="600" width="900">
+							<TD>									
+		                       	<div class="bc" >
+									<DIV id="select-panel"  style="width: 150px; left: -1000px; top: -1000px; display: block; position:absolute">
+										
+		                            	<p id="stsName" >역이름 : </p>
+		                            	<button id="siganButton" class="asd" type="button" onclick="myTimeFunction()">시간표</button> 
+		                                <button id="YeonButton" class="asd2" type="button" onclick="delayTrainFunction()" >연착정보</button>
+		                            </DIV>
+									
+									<SVG height="715" width="100%">
                                         <G stroke="blue"
 											stroke-linejoin="round" stroke-linecap="round">
-                                            <PATH class="path 1 2"
-											d="M100 500 H150" stroke-width="10"></PATH>
-                                            <PATH class="path 2 3"
-											d="M150 500 H200" stroke-width="10"></PATH>
-                                            <PATH class="path 3 4"
-											d="M200 500 H250" stroke-width="10"></PATH>
-                                            <PATH class="path 4 5"
-											d="M250 500 H300" stroke-width="10"></PATH>
-                                            <PATH class="path 5 6"
-											d="M300 500 H350" stroke-width="10"></PATH>
-                                            <PATH class="path 6 7"
-											d="M350 500 H400" stroke-width="10"></PATH>
-                                            <PATH class="path 7 8"
-											d="M400 500 H450" stroke-width="10"></PATH>
-                                            <PATH class="path 8 9"
-											d="M450 500 H500" stroke-width="10"></PATH>
-                                            <PATH class="path 9 10"
-											d="M500 500 H550" stroke-width="10"></PATH>
-                                            <PATH class="path 10 11"
-											d="M550 500 H600" stroke-width="10"></PATH>
-                                            <PATH class="path 11 12"
-											d="M600 500 H650" stroke-width="10"></PATH>
-                                            <PATH class="path 12 13"
-											d="M650 500 H700" stroke-width="10"></PATH>
-                                            <PATH class="path 13 14"
-											d="M700 500 H750" stroke-width="10"></PATH>
-                                            <PATH class="path 14 15"
-											d="M750 500 H800" stroke-width="10"></PATH>
+                                            <PATH class="path 1 2" d="M330 510 H380" stroke-width="10"></PATH>
+                                            <PATH class="path 2 3" d="M400 510 H450" stroke-width="10"></PATH>
+                                            <PATH class="path 3 4" d="M470 510 H520" stroke-width="10"></PATH>
+                                            <PATH class="path 4 5" d="M540 510 H590" stroke-width="10"></PATH>
+                                            <PATH class="path 5 6" d="M615 510 H665" stroke-width="10"></PATH>
+                                            <PATH class="path 6 7" d="M690 510 H740" stroke-width="10"></PATH>
+                                            <PATH class="path 7 8" d="M755 510 H805" stroke-width="10"></PATH>
+                                            <PATH class="path 8 9" d="M820 510 H870" stroke-width="10"></PATH>
+                                            <PATH class="path 9 10" d="M885 510 H935" stroke-width="10"></PATH>
+                                            <PATH class="path 10 11" d="M950 510 H1000" stroke-width="10"></PATH>
+                                            <PATH class="path 11 12" d="M1015 510 H1065" stroke-width="10"></PATH>
+                                            <PATH class="path 12 13" d="M1080 510 H1130" stroke-width="10"></PATH>
+                                            <PATH class="path 13 14" d="M1145 510 H1195" stroke-width="10"></PATH>
+                                            <PATH class="path 14 15" d="M1210 510 H1260" stroke-width="10"></PATH>
                                         </G>
-                                        <CIRCLE class="sta 1" cx="100"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 2" cx="150"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 3" cx="200"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 4" cx="250"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 5" cx="300"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 6" cx="350"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 7" cx="400"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 8" cx="450"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 9" cx="500"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 10" cx="550"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 11" cx="600"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 12" cx="650"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 13" cx="700"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 14" cx="750"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
-                                        <CIRCLE class="sta 15" cx="800"
-											cy="500" r="10" stroke="blue" stroke-width="5" fill="white"></CIRCLE>
+                                        <CIRCLE class="sta 1" cx="335" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '수원')"></CIRCLE>
+                                        <CIRCLE class="sta 2" cx="400" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '세류')"></CIRCLE>
+                                        <CIRCLE class="sta 3" cx="470" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '병점')"></CIRCLE>
+                                        <CIRCLE class="sta 4" cx="540" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '세마')"></CIRCLE>
+                                        <CIRCLE class="sta 5" cx="615" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '오산대')"></CIRCLE>
+                                        <CIRCLE class="sta 6" cx="690" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '오산')"></CIRCLE>
+                                        <CIRCLE class="sta 7" cx="755" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '진위')"></CIRCLE>
+                                        <CIRCLE class="sta 8" cx="820" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '송탄')"></CIRCLE>
+                                        <CIRCLE class="sta 9" cx="885" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '서정리')"></CIRCLE>
+                                        <CIRCLE class="sta 10" cx="950" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '평택지제')"></CIRCLE>
+                                        <CIRCLE class="sta 11" cx="1015" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '평택')"></CIRCLE>
+                                        <CIRCLE class="sta 12" cx="1080" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '성환')"></CIRCLE>
+                                        <CIRCLE class="sta 13" cx="1145" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '직산')"></CIRCLE>
+                                        <CIRCLE class="sta 14" cx="1210" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '두정')"></CIRCLE>
+                                        <CIRCLE class="sta 15" cx="1275" cy="510" r="20" stroke="blue" stroke-width="5"
+                                            fill="white" onclick="select_station(this, '천안')"></CIRCLE>
+                                        
+                                        <text id="tx" x="315" y="550">수원</text>
+                                        <text id="tx" x="380" y="550">세류</text>
+                                        <text id="tx" x="450" y="550">병점</text>
+                                        <text id="tx" x="520" y="550">세마</text>
+                                        <text id="tx" x="590" y="550">오산대</text>
+                                        <text id="tx" x="675" y="550">오산</text>
+                                        <text id="tx" x="735" y="550">진위</text>
+                                        <text id="tx" x="805" y="550">송탄</text>
+                                        <text id="tx" x="860" y="550">서정리</text>
+                                        <text id="tx" x="915" y="550">평택지제</text>
+                                        <text id="tx" x="995" y="550">평택</text>
+                                        <text id="tx" x="1060" y="550">성환</text>
+                                        <text id="tx" x="1125" y="550">직산</text>
+                                        <text id="tx" x="1190" y="550">두정</text>
+                                        <text id="tx" x="1255" y="550">천안</text>
+                                        
                                     </SVG>
-								</p>
+								</div>
 							</TD>
 						</TR>
 					</TABLE>
 				</TD>
 				<TD valign="top" style="width:25%;">
-					<TABLE border="1" style="width: 100%;">
+					<TABLE border="0" style="width: 100%; border-spacing: 0;">
 						<TR>
 							<TD bgcolor="#AFEEEE">
 								<DIV align="center" style="display: block; padding: 10px;">
@@ -131,6 +234,15 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 									%>
 								</DIV>
 							</TD>
+						</TR>
+						<TR>
+							<TD bgcolor="#4682B4" style="padding: 5px;">  
+							        <FONT size="5em">열차 시간정보</FONT>
+								
+									<DIV id="information-panel">
+										
+									</DIV> 
+						    </TD>
 						</TR>
 						<%
 						if ((String) session.getAttribute("member_id") != null) {
