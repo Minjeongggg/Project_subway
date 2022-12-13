@@ -26,7 +26,7 @@ header #header_img{
     width: 100%;
 }
 
-/*  */
+
 
 #wrap_main{
     margin-top: 75px;
@@ -43,10 +43,10 @@ header #header_img{
 }
 
 #information-panel{
-	
-	height: 200px;
+	font-size:14pt;
+	height: 230px;
 	display:block;
-	background-color: yellow; /*rgb(255, 221, 255)*/
+	background-color: rgb(255, 221, 255);
 }
 #siganButton:focus{
 	 background: gray;
@@ -201,21 +201,20 @@ span#btn_ham {
     user-select: none;
 }
 
-@media (max-width: 1850px) {
-    TD#screen_main {
+@media (min-width: 1500px) and (max-width: 1850px) {
+ TD#screen_main {
         width: 100%;
     }
-
+    
     TD#screen_side {
         width: 350px;
         position: fixed;
         top: 75px;
         right: 0;
-        display: none;
+        display: inline;
     }
 
     span#btn_ham {
         display: block;
     }
 }
-
