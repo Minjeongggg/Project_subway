@@ -147,6 +147,10 @@ header #header_img{
 }
 
 
+.bookmark_hover:hover{
+	font-weight: 600;
+}
+
 input[name="subway_nm"]{
    display: none;
 }

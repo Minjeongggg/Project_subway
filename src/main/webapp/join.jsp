@@ -30,7 +30,7 @@
             <div id="join_inputDiv">
                 <div>
                     <input type="text" name="member_id" placeholder="사용할 아이디를 입력하세요">
-                    <div id="idCheck_div"><input type="button" id="idCheck_btn" value="중복확인"></div>
+                    <!--<div id="idCheck_div"><input type="button" id="idCheck_btn" value="중복확인"></div>  -->
                     <input type="hidden" name="id_check" value="false">
                 </div>
                 <div><input type="password" name="member_pw" placeholder="사용할 비밀번호를 입력하세요"></div>
