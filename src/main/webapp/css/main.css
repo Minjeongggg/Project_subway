@@ -147,8 +147,8 @@ header #header_img{
 }
 
 
-.bookmark_hover:hover{
-	font-weight: 600;
+#bookmarked_div  div:hover{
+	font-weight: 800;
 }
 
 input[name="subway_nm"]{
