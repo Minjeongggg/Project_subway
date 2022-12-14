@@ -139,14 +139,14 @@
 					str_time += "<td>" + str_down + str_down_state + "</td>";
 					str_time += "<tr height=15px><td> </td></tr>";
 					if(delay == "blue"){
-						str_img += "<td><img src='./img/blue_subway.png' width=100px height=150px></td>";
-						str_img += "<td><img src='./img/blue_subway.png' width=100px height=150px></td>";
+						str_img += "<td><img src='./img/down_subway.png' width=140px height=90px></td>";
+						str_img += "<td><img src='./img/up_subway.png' width=140px height=90px></td>";
 						//$("#delay_img").append("<img src='./img/blue_subway.png' width=100px height=100px>");
 						//$("#delay_img").attr("style", "width:50px; height:50px;")
 					}
 					else if (delay ==  "red"){
-						str_img += "<td><img src='./img/red_subway.png' width=100px height=150px></td>";
-						str_img += "<td><img src='./img/red_subway.png' width=100px height=150px></td>";
+						str_img += "<td><img src='./img/red_subway.png' width=140px height=90px></td>";
+						str_img += "<td><img src='./img/red_subway.png' width=140px height=90px></td>";
 						//$("#information-panel").append("<div><img src='./img/red_subway.png'></div>");
 					}
 					str_time += "<tr>" + str_img + "</tr>";
@@ -353,7 +353,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 
 												<c:forEach var="item" items="${bookmarkList}" varStatus="i">
 													<c:if test="${! empty item.member_id}">
-														<div class="${item.station_nm}">⭐${item.station_nm}역</div>
+														<div class="${item.station_nm}">⭐${item.station_nm}역</div> 
 													</c:if>
 												</c:forEach>
 
@@ -482,7 +482,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 											}
 										} else {
 											$("#bookmarked_div").append(
-													"<div class="+bookmark_nm+">"
+													"<div class="+bookmark_nm+" bookmark_hover>"
 															+ "⭐" + bookmark_nm
 															+ "역 </div>");
 										}
