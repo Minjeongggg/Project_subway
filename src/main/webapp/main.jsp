@@ -353,7 +353,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 
 												<c:forEach var="item" items="${bookmarkList}" varStatus="i">
 													<c:if test="${! empty item.member_id}">
-														<div class="bookmark_hover" class="${item.station_nm}"  onclick="select_station(this, '${item.station_nm}'); myTimeFunction(); ">⭐${item.station_nm}역</div>
+														<div class="${item.station_nm}">⭐${item.station_nm}역</div>
 													</c:if>
 												</c:forEach>
 
@@ -482,7 +482,7 @@ List<BookmarkDTO> bookmarkList = (ArrayList) session.getAttribute("bookmarkList"
 											}
 										} else {
 											$("#bookmarked_div").append(
-													"<div class="+bookmark_nm+">"
+													"<div class="+bookmark_nm+" bookmark_hover>"
 															+ "⭐" + bookmark_nm
 															+ "역 </div>");
 										}
