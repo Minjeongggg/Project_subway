@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/*  */
 
 header{
     position: fixed;
@@ -33,6 +32,9 @@ header #header_img{
    
 }
 
+.bookmark_hover:hover{
+	font-weight: 600;
+}
 
 #select-panel{
     width: 130px;
@@ -44,9 +46,9 @@ header #header_img{
 
 #information-panel{
 	font-size:14pt;
-	height: 230px;
+	height: 200px;
 	display:block;
-	background-color: rgb(255, 221, 255);
+	background-color: whitesmoke;
 }
 #siganButton:focus{
 	 background: gray;

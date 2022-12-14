@@ -28,4 +28,16 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/webapp/WEB-INF/lib/json-simple-1.1.1.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/My_lib/json-simple-1.1.1.jar</locationURI>
+		</link>
+		<link>
+			<name>src/main/webapp/WEB-INF/lib/mysql-connector-j-8.0.31.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/My_lib/mysql-connector-j-8.0.31/mysql-connector-j-8.0.31/mysql-connector-j-8.0.31.jar</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
